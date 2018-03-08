@@ -12,6 +12,8 @@ Dir['./config/initializers/**/*.rb',
     './handlers/**/*.rb',
     './services/**/*rb'].each { |file| require file }
 
+STDOUT.sync = true
+
 class Application
   class << self
     def run

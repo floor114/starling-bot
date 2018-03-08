@@ -1,0 +1,18 @@
+default: &default
+  encoding: utf8
+  pool: 5
+  adapter: postgresql
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: starling_bot_dev
+
+test:
+  <<: *default
+  database: starling_bot_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
