@@ -30,6 +30,6 @@ class Handle < BaseService
   end
 
   def handler_class_name
-    @handler_class_name ||= "Handlers::#{command.tr('/', '').classify}"
+    @handler_class_name ||= "Handlers::#{command.tr('/', '').camelize}"
   end
 end

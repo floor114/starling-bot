@@ -7,10 +7,12 @@ Bundler.require(:default, Environment.current)
 
 require './services/base_service'
 require './handlers/base_handler'
+require './services/fetchers/base_fetcher'
 
 Dir['./config/initializers/**/*.rb',
     './handlers/**/*.rb',
-    './services/**/*rb'].each { |file| require file }
+    './services/**/*.rb',
+    './models/**/*.rb'].sort.each { |file| require file }
 
 STDOUT.sync = true
 

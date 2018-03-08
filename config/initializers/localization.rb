@@ -15,7 +15,7 @@ module Initializers
     end
 
     def default_locale
-      :en
+      :ua
     end
   end
 end
