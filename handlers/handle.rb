@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class Handle < BaseService
-  COMMAND_REGEX = %r[\/[a-z,_]+]
-
   def initialize(message, bot)
     @message = message
     @bot = bot
+    @command, @args = ::CommandParser.call(message.text)
   end
 
   def call
@@ -19,17 +18,9 @@ class Handle < BaseService
 
   private
 
-  attr_reader :message, :bot
-
-  def command
-    @command ||= message.text[COMMAND_REGEX]
-  end
-
-  def args
-    @args ||= message.text.gsub(command, '').split(',').map(&:strip)
-  end
+  attr_reader :message, :bot, :command, :args
 
   def handler_class_name
-    @handler_class_name ||= "Handlers::#{command.tr('/', '').camelize}"
+    @handler_class_name ||= "Handlers::#{command.camelize}"
   end
 end
