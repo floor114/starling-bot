@@ -1,1 +1,1 @@
-run: bin/run
+start: bionic start
