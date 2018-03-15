@@ -3,7 +3,6 @@
 module Handlers
   class Lunch < BaseHandler
     private
-    private *(delegate :members, to: :lunch)
 
     def answer
       return I18n.t('lunch.members.not_found') if members.blank?
@@ -13,6 +12,10 @@ module Handlers
         answer.push("#{I18n.t('lunch.obedi')}\n#{obedi_orders}") if obedi_orders.present?
         answer.push("#{I18n.t('lunch.kolo_smaku')}\n#{kolo_smaku_orders}") if kolo_smaku_orders.present?
       end.join("\n\n")
+    end
+
+    def members
+      @members ||= args.empty? ? lunch.members : args
     end
 
     def lunch
