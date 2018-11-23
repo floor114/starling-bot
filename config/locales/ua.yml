@@ -2,6 +2,7 @@ ua:
   lunch:
     obedi: 'Обеди:'
     kolo_smaku: 'Коло смаку:'
+    moms_kitchen: "Mom's Kitchen:"
     not_found: 'Сьогодні ви безобідні :D'
     members:
       not_found: 'Не знайдено жодного користувача!'
