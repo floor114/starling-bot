@@ -6,7 +6,7 @@ module Handlers
 
     def answer
       return I18n.t('lunch.members.not_found') if members.blank?
-      return I18n.t('lunch.not_found') if obedi_orders.blank? && kolo_smaku_orders.blank?
+      return I18n.t('lunch.not_found') if obedi_orders.blank? && kolo_smaku_orders.blank? && moms_kitchen_orders.blank?
 
       [].tap do |answer|
         answer.push("#{I18n.t('lunch.obedi')}\n#{obedi_orders}") if obedi_orders.present?
