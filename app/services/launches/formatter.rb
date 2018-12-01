@@ -24,7 +24,7 @@ module Lunches
 
     def select_meals(member)
       parsed_data.each_with_object([]) do |data, meals|
-        meals << "* #{data[:meal].downcase};" if data[:members].include?(member)
+        meals << "* #{data[:meal].downcase};" if data[:members].any? { |e| e.downcase[member.downcase] }
       end.join("\n")
     end
   end
