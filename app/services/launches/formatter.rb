@@ -8,10 +8,19 @@ module Lunches
     end
 
     def call
-      members.each_with_object([]) do |member, orders|
-        meals = select_meals(member)
-        orders.push("-> #{member}:\n#{meals}") if meals.present?
+      data.each_with_object([]) do |(member, meals), orders|
+        meals = meals.map { |meal| I18n.t('lunch.meal', meal: meal) }.join("\n")
+
+        orders.push("-> #{member}:\n#{meals}")
       end.join("\n\n")
+    end
+
+    def data
+      @data ||= members.each_with_object(Hash.new([])) do |member, hash|
+        meals = select_meals(member)
+
+        hash[member] = hash[member].concat(meals) if meals.present?
+      end
     end
 
     private
@@ -24,8 +33,8 @@ module Lunches
 
     def select_meals(member)
       parsed_data.each_with_object([]) do |data, meals|
-        meals << "* #{data[:meal].downcase};" if data[:members].any? { |e| e.downcase[member.downcase] }
-      end.join("\n")
+        meals << data[:meal].downcase if data[:members].any? { |e| e.downcase[member.downcase] }
+      end
     end
   end
 end
