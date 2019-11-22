@@ -7,7 +7,7 @@ module Lunches
     end
 
     def call
-      return if members.blank?
+      return if members.blank? || members_to_show.empty?
 
       I18n.t('lunch.members.without_lunch', members: members_to_show)
     end
