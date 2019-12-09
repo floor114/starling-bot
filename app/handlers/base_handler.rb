@@ -5,6 +5,7 @@ module Handlers
     def call
       perform_action
       super
+    rescue
     end
 
     private
